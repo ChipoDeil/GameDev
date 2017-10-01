@@ -624,8 +624,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f592a3ffc9e2ca2419d0c17254f03227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grenade: {fileID: 0}
-  camera: {fileID: 0}
+  grenadeObject: {fileID: 280989622}
+  cameraObject: {fileID: 206813582}
+  speed: 500
 --- !u!1 &612097688
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,7 +1129,7 @@ GameObject:
   - component: {fileID: 1336316423}
   - component: {fileID: 1336316426}
   m_Layer: 0
-  m_Name: OpenTheDoor
+  m_Name: TriggerForOpenTheDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1209,6 +1210,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f8b05de152d0041bf4746fefc8ec9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightObject: {fileID: 764208824}
+  cameraObject: {fileID: 206813582}
+  door: {fileID: 73276492}
+  doorCube: {fileID: 1379128304}
 --- !u!1 &1379128304
 GameObject:
   m_ObjectHideFlags: 0

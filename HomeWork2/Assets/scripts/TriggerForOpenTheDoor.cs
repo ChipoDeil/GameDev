@@ -1,37 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TriggerForOpenTheDoor : MonoBehaviour {
     private bool _isOpen = false;
+    public GameObject lightObject;
+    public GameObject cameraObject;
+    public GameObject door;
+    public GameObject doorCube;
     void OnTriggerEnter(Collider other) {
-        GameObject light = GameObject.Find("DoorLight");
         Debug.Log("EnteredTriggerForOpenTheDoor");
-        light.GetComponent<Light>().enabled = true;
+        lightObject.GetComponent<Light>().enabled = true;
         
     }
 
     void OnTriggerStay(Collider other) {
-        if (!_isOpen) { 
-            GameObject camera = GameObject.Find("Main Camera");
-            string nameOfObject = camera.GetComponent<LookDirection>().getNameOfObject();
-            if (nameOfObject.Equals("DoorCube") && Input.GetKeyDown(KeyCode.F))
-            {
-                GameObject doorCube = GameObject.Find("Door");
-                doorCube.transform.Rotate(0, 90, 0);
-                _isOpen = true;
-            }
+        if (IsItPossibleToOpenTheDoor()) {
+            OpenTheDoor();
         }
     }
 
+    bool IsItPossibleToOpenTheDoor()
+    {
+        if (!_isOpen && Input.GetKeyDown(KeyCode.F) &&
+            cameraObject.GetComponent<LookDirection>().getNameOfObject() == doorCube.name)
+            return true;
+        else
+            return false;
+    }
+
+    void OpenTheDoor() {
+        door.transform.Rotate(0, 90, 0);
+        _isOpen = true;
+    }
+
+    void CloseTheDoor()
+    {
+        door.transform.Rotate(0, -90, 0);
+        _isOpen = false;
+    }
+
     void OnTriggerExit(Collider other) {
-        GameObject light = GameObject.Find("DoorLight");
         Debug.Log("ExitedTriggerForOpenTheDoor");
-        light.GetComponent<Light>().enabled = false;
+        lightObject.GetComponent<Light>().enabled = false;
         if (_isOpen) {
-            GameObject doorCube = GameObject.Find("Door");
-            doorCube.transform.Rotate(0, -90, 0);
-            _isOpen = false;
+            CloseTheDoor();
         }
     }
 }
